@@ -15,7 +15,7 @@ module.exports = async (req, res) => {
 
   try {
     // parsing JSON body from request
-    const { name, description, image } = JSON.parse(req.body);
+    const { name, description, image } = req.body;
 
     // parse the image data and validate it
     const matches = image.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);

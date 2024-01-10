@@ -15,7 +15,7 @@ module.exports = async (req, res) => {
   }
 
   try {
-    const { inputs, options } = JSON.parse(req.body);
+    const { inputs, options } = req.body;
 
     // get the API key from environment variables
     const apiKey = process.env.REACT_APP_HUGGING_FACE_API_KEY;
