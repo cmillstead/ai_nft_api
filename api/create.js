@@ -4,9 +4,9 @@ const { NFTStorage, Blob } = require('nft.storage');
 
 module.exports = async (req, res) => {
   // set CORS headers
-  res.setHeader('Access-Control-Allow-Origin', '*'); // Adjust in production
+  res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
   // handle preflight OPTIONS request
   if (req.method === 'OPTIONS') {
