@@ -2,9 +2,9 @@ const axios = require('axios');
 require('dotenv').config();
 const { NFTStorage, Blob } = require('nft.storage');
 
-exports.handler = async (event) => {
+module.exports = async (req, res) => {
   try {
-    const { inputs, options } = JSON.parse(event.body);
+    const { inputs, options } = JSON.parse(req.body);
 
     // get the API key from environment variables
     const apiKey = process.env.REACT_APP_HUGGING_FACE_API_KEY;

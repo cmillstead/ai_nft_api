@@ -1,10 +1,10 @@
 const { NFTStorage, Blob } = require('nft.storage');
 require('dotenv').config();
 
-exports.handler = async (event) => {
+module.exports = async (req, res) => {
   try {
-    // Parsing JSON body from event
-    const { name, description, image } = JSON.parse(event.body);
+    // Parsing JSON body from request
+    const { name, description, image } = JSON.parse(req.body);
 
     // parse the image data and validate it
     const matches = image.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
