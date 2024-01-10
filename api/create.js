@@ -3,14 +3,15 @@ require('dotenv').config();
 const { NFTStorage, Blob } = require('nft.storage');
 
 module.exports = async (req, res) => {
-  // Set CORS headers
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  // set CORS headers
+  res.setHeader('Access-Control-Allow-Origin', '*'); // Adjust in production
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-  // Handle preflight OPTIONS request
+  // handle preflight OPTIONS request
   if (req.method === 'OPTIONS') {
-    return res.status(200).end();
+    res.status(200).end();
+    return;
   }
 
   try {
@@ -26,7 +27,7 @@ module.exports = async (req, res) => {
     }, {
       headers: {
         Accept: 'application/json',
-        'content-type': 'application/json',
+        'Content-Type': 'application/json',
         'Authorization': `Bearer ${apiKey}`
       },
       responseType: 'arraybuffer'
@@ -40,11 +41,7 @@ module.exports = async (req, res) => {
     const type = response.headers['content-type'];
 
     // send the image back in the response
-    return {
-      statusCode: 200,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ image: `data:${type};base64,${imageBase64}` })
-    };
+    res.status(200).json({ image: `data:${type};base64,${imageBase64}` });
   } catch (error) {
     console.error('Error:', error.message);
 
@@ -62,10 +59,6 @@ module.exports = async (req, res) => {
       errorMessage = 'No response received from Hugging Face API';
     }
 
-    return {
-      statusCode: statusCode,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ error: errorMessage })
-    };
+    res.status(statusCode).json({ error: errorMessage });
   }
 };
