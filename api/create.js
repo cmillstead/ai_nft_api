@@ -21,7 +21,7 @@ module.exports = async (req, res) => {
     const apiKey = process.env.REACT_APP_HUGGING_FACE_API_KEY;
 
     // send a POST request to Hugging Face API with inputs and options
-    const response = await axios.post('https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-2/', {
+    const response = await axios.post('https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-2', {
       inputs,
       options,
     }, {
